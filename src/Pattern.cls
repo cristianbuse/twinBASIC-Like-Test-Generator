@@ -26,12 +26,23 @@ Public Sub Randomize(ByVal elemCount As Long)
     Dim i As Long
     Dim sb As StringBuffer
     Dim elem As IPatternElement
+    Dim cList As CharList
+    Dim hasMultiWildcard As Boolean 'Track to avoid "*[K-K]" quirk
     
     Set m_elements = New Collection
     Set sb = New StringBuffer
     
     For i = 1 To RandBetween(1, elemCount)
         Set elem = RandomElement()
+        Select Case elem.ElementType
+        Case etMultiWildcard
+            hasMultiWildcard = True
+        Case etCharList
+            If hasMultiWildcard Then
+                Set cList = elem
+                cList.Randomize disallowOneElemRanges:=True
+            End If
+        End Select
         m_elements.Add elem
         sb.Append elem.ToString
     Next i

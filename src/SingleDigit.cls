@@ -33,7 +33,7 @@ Public Function RandomMatchingText(ByVal failOneIn As Long) As String
     If RandBetween(1, failOneIn) > 1 Then
          RandomMatchingText = Chr$(RandBetween(48, 57))
     Else
-        'Force not matching
+        'Force to not match
         Dim temp As String
             
         Do

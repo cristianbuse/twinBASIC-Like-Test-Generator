@@ -39,12 +39,12 @@ Public Function RandomMatchingText(ByVal failOneIn As Long) As String
     If RandBetween(1, failOneIn) > 1 Then
          RandomMatchingText = m_value
     Else
-        'Force not matching
+        'Force to not match
         Dim temp As String
             
         Do
             temp = RandCharacter()
-        Loop Until Asc(temp) <> Asc(m_value)
+        Loop Until AscW(temp) <> AscW(m_value)
         RandomMatchingText = temp
     End If
 End Function

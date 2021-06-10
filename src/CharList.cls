@@ -36,7 +36,7 @@ Public Property Get NotIn() As Boolean
     NotIn = m_notIn
 End Property
 
-Public Sub Randomize()
+Public Sub Randomize(Optional ByVal disallowOneElemRanges As Boolean = False)
     m_notIn = (RandBetween(0, 2) = 0)
     
     Dim i As Long
@@ -51,13 +51,13 @@ Public Sub Randomize()
     m_hasValidElements = False
     
     For i = 1 To RandBetween(0, 5)
-        If RandBetween(0, 5) = 0 Then
+        If RandBetween(0, 3) = 0 Then
             tempText = tempMulti.RandomMatchingText(0, 10)
             m_elements.Add tempText
             If tempText <> vbNullString Then m_hasValidElements = True
         Else
             With New CharRange
-                .Randomize
+                .Randomize disallowOneElemRanges
                 sb.Append .ToString
                 m_elements.Add .Self
                 If .IsValid Then m_hasValidElements = True

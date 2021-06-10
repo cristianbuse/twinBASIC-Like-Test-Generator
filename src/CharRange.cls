@@ -28,11 +28,11 @@ Public Property Get EndChar() As String
     EndChar = m_end
 End Property
 
-Public Sub Randomize()
+Public Sub Randomize(Optional ByVal disallowOneElemRanges As Boolean = False)
     Do
         m_start = RandCharacter()
         m_end = RandCharacter()
-    Loop Until StrComp(m_start, m_end, vbBinaryCompare) < 1
+    Loop Until StrComp(m_start, m_end, vbBinaryCompare) < IIf(disallowOneElemRanges, 0, 1)
     If RandBetween(0, 50) = 0 Then m_start = vbNullString
     If RandBetween(0, 50) = 0 Then m_end = vbNullString
 End Sub
